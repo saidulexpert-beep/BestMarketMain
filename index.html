@@ -404,11 +404,11 @@
             </div>
 
             <div id="updates-page" class="p-4 space-y-6 sub-page relative pb-24">
-                <h2 class="text-xl font-bold text-center">Latest Updates</h2>
+                <h2 class="text-xl font-bold text-center">🌟 𝐍𝐞𝐰 𝐔𝐩𝐝𝐚𝐭𝐞</h2>
                 <div id="updates-content" class="space-y-4"><p class="text-center text-gray-500">Loading updates...</p></div>
                 
                 <div id="user-reviews-section" class="mt-8">
-                    <h3 class="text-xl font-bold text-center mb-4">User Reviews</h3>
+                    <h3 class="text-xl font-bold text-center mb-4">🌟 𝐔𝐬𝐞𝐫 𝐑𝐞𝐯𝐢𝐞𝐰𝐬</h3>
                     <div id="user-reviews-list" class="space-y-4">
                         </div>
                 </div>
@@ -437,7 +437,7 @@
                 </div>
                 
                 <div class="card-bg p-4 rounded-xl">
-                    <h3 class="text-sm font-medium text-gray-500 mb-2 text-center">Your Referral Code</h3>
+                    <h3 class="text-sm font-medium text-gray-500 mb-2 text-center">🎁 Referral Code</h3>
                     <div class="bg-blue-50 border-2 border-dashed border-blue-200 rounded-lg p-3 flex items-center justify-center">
                         <span id="referral-code-display" class="text-lg font-bold text-gray-700 mr-4 break-all">LOADING...</span>
                         <button id="copy-referral-btn" class="btn p-2 bg-gray-200 rounded-lg hover:bg-gray-300"><i data-lucide="copy" class="w-5 h-5 text-gray-600"></i></button>
@@ -1450,7 +1450,7 @@ async function handleSellRequest(itemConfig) {
 
                 // যদি কোনো ডুপ্লিকেট পাওয়া যায়
                 if (!snapshot.empty) {
-                    showAlert(`এই অ্যাকাউন্টের তথ্য (${uniqueFieldName}: ${uniqueFieldValue}) ব্যবহার করে ইতিমধ্যে একটি অনুরোধ জমা দেওয়া হয়েছে।`);
+                    showAlert(`আপনার(${uniqueFieldName}: ${uniqueFieldValue})অ্যাকাউন্ট একবার Sell দিয়েছেন`);
                     splashScreen.style.display = 'none';
                     splashScreen.style.opacity = '0';
                     return; // ফাংশন এখানেই শেষ
@@ -1469,10 +1469,10 @@ async function handleSellRequest(itemConfig) {
             status: "pending",
             requestedAt: serverTimestamp()
         });
-        showAlert("আপনার বিক্রির অনুরোধ সফলভাবে জমা হয়েছে।");
+        showAlert("🎉 আপনার অ্যাকাউন্ট সফলভাবে জমা হয়েছে!");
         loadSellHistory();
     } catch (error) {
-        showAlert("আপনার অনুরোধ জমা দিতে একটি সমস্যা হয়েছে।");
+        showAlert("🔁 ⚠️ Error! Please refresh the bot.");
         console.error("Sell request error:", error);
     } finally {
         splashScreen.style.display = 'none';
