@@ -1434,28 +1434,28 @@
             splashScreen.style.opacity = '1';
 
             try {
-                // ### পরিবর্তন শুরু ###
-                // আমরা এখন accountType নির্দিষ্ট না করে ব্যবহারকারীর যেকোনো পেন্ডিং অনুরোধ খুঁজছি।
+                // ### চূড়ান্ত পরিবর্তন শুরু ###
+                // কোডটি এখন চেক করছে যে এই ব্যবহারকারী এই accountType অতীতে কখনো জমা দিয়েছেন কিনা, স্ট্যাটাস যাই হোক না কেন।
                 const existingSellQuery = query(
                     collection(db, "sell_requests"),
                     where("userId", "==", currentUserId),
-                    where("status", "==", "pending") // শুধু স্ট্যাটাস দিয়ে খোঁজা হচ্ছে
+                    where("accountType", "==", itemConfig.type), // নির্দিষ্ট একাউন্ট টাইপ খোঁজা হচ্ছে
+                    limit(1) // একটি রেকর্ড পেলেই যথেষ্ট
                 );
                 const existingSellSnapshot = await getDocs(existingSellQuery);
 
+                // যদি অতীতে কোনো রেকর্ড খুঁজে পাওয়া যায় (snapshot empty না হয়)
                 if (!existingSellSnapshot.empty) {
-                    // ব্যবহারকারীকে আরও তথ্যবহুল একটি বার্তা দেখানো হচ্ছে।
-                    const pendingRequestData = existingSellSnapshot.docs[0].data();
-                    const pendingType = pendingRequestData.accountType;
-                    
-                    showAlert(`আপনার একটি সেল রিকোয়েস্ট ("${pendingType}") ইতিমধ্যেই পেন্ডিং আছে। একটি সময়ে কেবল একটি অনুরোধই পেন্ডিং রাখা যাবে। অনুগ্রহ করে অ্যাডমিনের পর্যালোচনার জন্য অপেক্ষা করুন।`);
+                    // তাহলে ব্যবহারকারীকে ব্লক করা হবে এবং নতুন বার্তা দেখানো হবে।
+                    showAlert(`আপনি "${itemConfig.type}" ধরনের অ্যাকাউন্ট ইতিমধ্যে একবার বিক্রির জন্য জমা দিয়েছেন। প্রতিটি ধরনের অ্যাকাউন্ট শুধুমাত্র একবারই জমা দেওয়া যাবে।`);
                     
                     splashScreen.style.display = 'none';
                     splashScreen.style.opacity = '0';
                     return;
                 }
-                // ### পরিবর্তন শেষ ###
+                // ### চূড়ান্ত পরিবর্তন শেষ ###
 
+                // যদি কোনো পুরোনো রেকর্ড না পাওয়া যায়, তবেই নতুন অনুরোধ জমা হবে।
                 await addDoc(collection(db, "sell_requests"), {
                     userId: currentUserId,
                     userName: userData.name,
