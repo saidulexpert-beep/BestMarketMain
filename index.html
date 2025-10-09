@@ -1498,73 +1498,93 @@ async function handleSellRequest(itemConfig) {
             } catch (error) { historyList.innerHTML = '<p class="text-red-500 text-center">Could not load sell history.</p>'; }
         }
         
-        async function loadUpdates() {
-            const updatesContainer = document.getElementById('updates-content');
-            const reviewFab = document.getElementById('add-review-fab');
-            updatesContainer.innerHTML = '<p class="text-center text-gray-500">Loading updates...</p>';
+async function loadUpdates() {
+    const updatesContainer = document.getElementById('updates-content');
+    const reviewFab = document.getElementById('add-review-fab');
+    updatesContainer.innerHTML = '<p class="text-center text-gray-500">Loading updates...</p>';
 
-            reviewFab.href = appConfig.addReviewLink || '#';
+    reviewFab.href = appConfig.addReviewLink || '#';
 
-            try {
-                const q = query(collection(db, "updates"), orderBy("createdAt", "desc"), limit(10));
-                const snapshot = await getDocs(q);
+    // ১. এখানে আপনার টেলিগ্রাম চ্যানেলের লিংকসহ বাটনটি তৈরি করা হয়েছে।
+    //    প্রয়োজনে "href" এর ভেতরের লিংকটি পরিবর্তন করে নিতে পারেন।
+    const channelButtonHtml = `
+        <a href="https://t.me/BestMarketMain" target="_blank" 
+           class="flex items-center justify-center gap-3 w-full p-3 rounded-xl mb-6 
+                  bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold shadow-lg 
+                  hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+            <i data-lucide="send" class="w-5 h-5"></i>
+            <span>https://t.me/BestMarketMain</span>
+        </a>
+    `;
+    
+    // ২. একটি ভেরিয়েবলে বাটনের কোডটি রেখে দেওয়া হলো।
+    let finalHtml = channelButtonHtml; 
 
-                if (snapshot.empty) {
-                    updatesContainer.innerHTML = `<div class="card-bg p-6 rounded-2xl text-center"><h3 class="font-bold text-xl">No new updates right now!</h3><p class="text-gray-500 mt-2">Check back later.</p></div>`;
-                } else {
-                    let allUpdatesHtml = '';
-                    const batch = writeBatch(db); 
-                    for (const docSnap of snapshot.docs) {
-                        const updateData = docSnap.data();
-                        const updateId = docSnap.id;
+    try {
+        const q = query(collection(db, "updates"), orderBy("createdAt", "desc"), limit(10));
+        const snapshot = await getDocs(q);
 
-                        const updateRef = doc(db, "updates", updateId);
-                        batch.update(updateRef, { views: increment(1) });
+        if (snapshot.empty) {
+            // ৩. যদি কোনো আপডেট না থাকে, তাহলে বাটনের নিচে 'No new updates' বার্তাটি যোগ করা হবে।
+            finalHtml += `<div class="card-bg p-6 rounded-2xl text-center"><h3 class="font-bold text-xl">No new updates right now!</h3><p class="text-gray-500 mt-2">Check back later.</p></div>`;
+        } else {
+            let allUpdatesHtml = '';
+            const batch = writeBatch(db); 
+            for (const docSnap of snapshot.docs) {
+                const updateData = docSnap.data();
+                const updateId = docSnap.id;
 
-                        const userInteractionDoc = await getDoc(doc(db, "updates", updateId, "userInteractions", currentUserId));
-                        const userVote = userInteractionDoc.exists() ? userInteractionDoc.data().vote : null;
+                const updateRef = doc(db, "updates", updateId);
+                batch.update(updateRef, { views: increment(1) });
 
-                        const isLiked = userVote === 'liked';
-                        const isDisliked = userVote === 'disliked';
-                        
-                        allUpdatesHtml += `
-                        <div class="card-bg rounded-2xl overflow-hidden shadow-lg flex flex-col">
-                            <a href="${updateData.linkUrl || '#'}" target="_blank" class="block w-full aspect-video">
-                                <img src="${updateData.imageUrl}" class="w-full h-full object-cover" alt="Update Banner">
-                            </a>
-                            <div class="p-5 space-y-3 flex flex-col flex-grow">
-                                <h3 class="text-xl font-bold">${updateData.title}</h3>
-                                <p class="text-gray-600 text-sm whitespace-pre-wrap flex-grow">${updateData.content || ''}</p>
-                                <div class="flex items-center justify-between gap-4 pt-3 mt-auto">
-                                    <div class="flex items-center gap-4">
-                                        <div class="flex items-center space-x-2">
-                                            <button id="like-btn-${updateId}" class="vote-btn p-2 rounded-full ${isLiked ? 'voted-like' : 'text-gray-500'}" ${isLiked || isDisliked ? 'disabled' : ''} onclick="handleVote('like', '${updateId}')"><i data-lucide="thumbs-up" class="w-5 h-5"></i></button>
-                                            <span id="like-count-${updateId}" class="font-semibold text-sm">${updateData.likes || 0}</span>
-                                        </div>
-                                        <div class="flex items-center space-x-2">
-                                            <button id="dislike-btn-${updateId}" class="vote-btn p-2 rounded-full ${isDisliked ? 'voted-dislike' : 'text-gray-500'}" ${isLiked || isDisliked ? 'disabled' : ''} onclick="handleVote('dislike', '${updateId}')"><i data-lucide="thumbs-down" class="w-5 h-5"></i></button>
-                                            <span id="dislike-count-${updateId}" class="font-semibold text-sm">${updateData.dislikes || 0}</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-gray-500">
-                                        <i data-lucide="eye" class="w-5 h-5"></i>
-                                        <span class="font-semibold text-sm">${(updateData.views || 0) + 1}</span>
-                                    </div>
+                const userInteractionDoc = await getDoc(doc(db, "updates", updateId, "userInteractions", currentUserId));
+                const userVote = userInteractionDoc.exists() ? userInteractionDoc.data().vote : null;
+
+                const isLiked = userVote === 'liked';
+                const isDisliked = userVote === 'disliked';
+                
+                allUpdatesHtml += `
+                <div class="card-bg rounded-2xl overflow-hidden shadow-lg flex flex-col">
+                    <a href="${updateData.linkUrl || '#'}" target="_blank" class="block w-full aspect-video">
+                        <img src="${updateData.imageUrl}" class="w-full h-full object-cover" alt="Update Banner">
+                    </a>
+                    <div class="p-5 space-y-3 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold">${updateData.title}</h3>
+                        <p class="text-gray-600 text-sm whitespace-pre-wrap flex-grow">${updateData.content || ''}</p>
+                        <div class="flex items-center justify-between gap-4 pt-3 mt-auto">
+                            <div class="flex items-center gap-4">
+                                <div class="flex items-center space-x-2">
+                                    <button id="like-btn-${updateId}" class="vote-btn p-2 rounded-full ${isLiked ? 'voted-like' : 'text-gray-500'}" ${isLiked || isDisliked ? 'disabled' : ''} onclick="handleVote('like', '${updateId}')"><i data-lucide="thumbs-up" class="w-5 h-5"></i></button>
+                                    <span id="like-count-${updateId}" class="font-semibold text-sm">${updateData.likes || 0}</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button id="dislike-btn-${updateId}" class="vote-btn p-2 rounded-full ${isDisliked ? 'voted-dislike' : 'text-gray-500'}" ${isLiked || isDisliked ? 'disabled' : ''} onclick="handleVote('dislike', '${updateId}')"><i data-lucide="thumbs-down" class="w-5 h-5"></i></button>
+                                    <span id="dislike-count-${updateId}" class="font-semibold text-sm">${updateData.dislikes || 0}</span>
                                 </div>
                             </div>
-                        </div>`;
-                    }
-                    await batch.commit(); 
-                    updatesContainer.innerHTML = allUpdatesHtml;
-                }
-                
-                lucide.createIcons();
-                await loadUserReviews();
-            } catch (e) {
-                console.error("Error loading updates:", e);
-                updatesContainer.innerHTML = `<p class="text-center text-red-500">Failed to load updates.</p>`;
+                            <div class="flex items-center gap-2 text-gray-500">
+                                <i data-lucide="eye" class="w-5 h-5"></i>
+                                <span class="font-semibold text-sm">${(updateData.views || 0) + 1}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
             }
+            await batch.commit(); 
+            // ৪. যদি আপডেট থাকে, তাহলে বাটনের নিচে সেই আপডেটগুলো যোগ করা হবে।
+            finalHtml += allUpdatesHtml;
         }
+        
+        // ৫. সবশেষে, সম্পূর্ণ কোডটি (বাটন + কন্টেন্ট) পেইজে দেখানো হবে।
+        updatesContainer.innerHTML = finalHtml;
+        
+        lucide.createIcons();
+        await loadUserReviews();
+    } catch (e) {
+        console.error("Error loading updates:", e);
+        updatesContainer.innerHTML = `<p class="text-center text-red-500">Failed to load updates.</p>`;
+    }
+}
 
         function renderStars(rating) {
             let stars = '<div class="flex items-center gap-1 review-stars">';
