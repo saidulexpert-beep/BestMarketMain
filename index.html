@@ -1416,7 +1416,7 @@
         async function handleSellRequest(itemConfig) {
             if (!userData.isActivated) {
                 showAlert("আপনার অ্যাকাউন্ট অ্যাক্টিভ করা প্রয়োজন 'SELL NOW' ব্যবহার করার জন্য।");
-                checkActivation(); 
+                checkActivation();
                 return;
             }
             const accountDetails = {};
@@ -1428,36 +1428,49 @@
                 accountDetails[fieldName] = value;
             });
             if (!isValid) return showAlert("Please fill in all fields.");
-            
+
             document.getElementById('sell-modal').classList.add('hidden');
             splashScreen.style.display = 'flex';
             splashScreen.style.opacity = '1';
 
             try {
                 // ### পরিবর্তন শুরু ###
-                // এখানে আমরা শুধু "pending" স্ট্যাটাস চেক করছি, "approved" নয়।
+                // আমরা এখন accountType নির্দিষ্ট না করে ব্যবহারকারীর যেকোনো পেন্ডিং অনুরোধ খুঁজছি।
                 const existingSellQuery = query(
                     collection(db, "sell_requests"),
                     where("userId", "==", currentUserId),
-                    where("accountType", "==", itemConfig.type),
-                    where("status", "==", "pending") // শুধু 'pending' স্ট্যাটাস চেক করা হচ্ছে
+                    where("status", "==", "pending") // শুধু স্ট্যাটাস দিয়ে খোঁজা হচ্ছে
                 );
                 const existingSellSnapshot = await getDocs(existingSellQuery);
 
                 if (!existingSellSnapshot.empty) {
-                    // ব্যবহারকারীকে দেওয়া বার্তাটিও পরিবর্তন করা হয়েছে যাতে তা আরও স্পষ্ট হয়।
-                    showAlert(`আপনার একটি "${itemConfig.type}" অ্যাকাউন্ট বিক্রির অনুরোধ ইতিমধ্যেই পেন্ডিং আছে। অনুগ্রহ করে সেটির পর্যালোচনার জন্য অপেক্ষা করুন।`);
+                    // ব্যবহারকারীকে আরও তথ্যবহুল একটি বার্তা দেখানো হচ্ছে।
+                    const pendingRequestData = existingSellSnapshot.docs[0].data();
+                    const pendingType = pendingRequestData.accountType;
+                    
+                    showAlert(`আপনার একটি সেল রিকোয়েস্ট ("${pendingType}") ইতিমধ্যেই পেন্ডিং আছে। একটি সময়ে কেবল একটি অনুরোধই পেন্ডিং রাখা যাবে। অনুগ্রহ করে অ্যাডমিনের পর্যালোচনার জন্য অপেক্ষা করুন।`);
+                    
                     splashScreen.style.display = 'none';
                     splashScreen.style.opacity = '0';
                     return;
                 }
                 // ### পরিবর্তন শেষ ###
 
-                await addDoc(collection(db, "sell_requests"), { userId: currentUserId, userName: userData.name, accountType: itemConfig.type, accountDetails, askingPrice: itemConfig.price, status: "pending", requestedAt: serverTimestamp() });
-                showAlert("Your sell request has been submitted successfully.");
+                await addDoc(collection(db, "sell_requests"), {
+                    userId: currentUserId,
+                    userName: userData.name,
+                    accountType: itemConfig.type,
+                    accountDetails,
+                    askingPrice: itemConfig.price,
+                    status: "pending",
+                    requestedAt: serverTimestamp()
+                });
+                showAlert("আপনার বিক্রির অনুরোধ সফলভাবে জমা হয়েছে।");
                 loadSellHistory();
-            } catch (error) { showAlert("There was a problem submitting your request."); } 
-            finally { 
+            } catch (error) {
+                showAlert("আপনার অনুরোধ জমা দিতে একটি সমস্যা হয়েছে।");
+                console.error("Sell request error:", error);
+            } finally {
                 splashScreen.style.display = 'none';
                 splashScreen.style.opacity = '0';
             }
