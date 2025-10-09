@@ -1434,20 +1434,24 @@
             splashScreen.style.opacity = '1';
 
             try {
+                // ### পরিবর্তন শুরু ###
+                // এখানে আমরা শুধু "pending" স্ট্যাটাস চেক করছি, "approved" নয়।
                 const existingSellQuery = query(
                     collection(db, "sell_requests"),
                     where("userId", "==", currentUserId),
                     where("accountType", "==", itemConfig.type),
-                    where("status", "in", ["pending", "approved"])
+                    where("status", "==", "pending") // শুধু 'pending' স্ট্যাটাস চেক করা হচ্ছে
                 );
                 const existingSellSnapshot = await getDocs(existingSellQuery);
 
                 if (!existingSellSnapshot.empty) {
-                    showAlert(`আপনি ইতিমধ্যেই এই "${itemConfig.type}" অ্যাকাউন্ট বিক্রির জন্য জমা দিয়েছেন অথবা এটি অনুমোদিত হয়েছে।`);
+                    // ব্যবহারকারীকে দেওয়া বার্তাটিও পরিবর্তন করা হয়েছে যাতে তা আরও স্পষ্ট হয়।
+                    showAlert(`আপনার একটি "${itemConfig.type}" অ্যাকাউন্ট বিক্রির অনুরোধ ইতিমধ্যেই পেন্ডিং আছে। অনুগ্রহ করে সেটির পর্যালোচনার জন্য অপেক্ষা করুন।`);
                     splashScreen.style.display = 'none';
                     splashScreen.style.opacity = '0';
                     return;
                 }
+                // ### পরিবর্তন শেষ ###
 
                 await addDoc(collection(db, "sell_requests"), { userId: currentUserId, userName: userData.name, accountType: itemConfig.type, accountDetails, askingPrice: itemConfig.price, status: "pending", requestedAt: serverTimestamp() });
                 showAlert("Your sell request has been submitted successfully.");
