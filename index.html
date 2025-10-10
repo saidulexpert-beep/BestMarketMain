@@ -993,7 +993,7 @@
             document.getElementById('profile-name').textContent = userData.name;
             document.getElementById('profile-username').textContent = userData.username ? `@${userData.username}` : 'No Telegram username';
             document.getElementById('profile-id').textContent = `User ID: ${currentUserId}`;
-
+            document.getElementById('referral-code-display').textContent = userData.referralCode || "Loading...";
 
             const activationStatusElement = document.getElementById('profile-activation-status');
             if (userData.isActivated) {
