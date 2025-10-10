@@ -1018,14 +1018,6 @@
 ✉️ পরিবর্তন করতে এডমিনের সাথে যোগাযোগ করুন।</p>
                 `;
             } else {
-                let referralFieldHTML = '';
-                if (!userData.referredBy) {
-                    referralFieldHTML = `
-                    <div>
-                        <label for="link-referral" class="block text-sm font-medium text-gray-600 mb-1">Referral Code (Optional)</label>
-                        <input id="link-referral" type="text" placeholder="আপনার বন্ধুর রেফার কোড দিন" class="w-full p-3 rounded-lg input-field">
-                    </div>`;
-                }
                 
                 detailsContainer.innerHTML = `
                     <p class="text-sm text-center text-gray-600 pb-2">💬 এডমিন যেন সহজে যোগাযোগ করতে পারে, তাই সঠিক WhatsApp নম্বর দিন।</p>
@@ -1033,7 +1025,6 @@
                         <label for="link-mobile" class="block text-sm font-medium text-gray-600 mb-1">Active WhatsApp Number</label>
                         <input id="link-mobile" type="tel" placeholder="01xxxxxxxxx" class="w-full p-3 rounded-lg input-field">
                     </div>
-                    ${referralFieldHTML}
                     <button id="link-details-btn" class="w-full p-3 mt-2 rounded-lg btn-gradient">Save Details</button>
                 `;
                 document.getElementById('link-details-btn').addEventListener('click', handleLinkAccountDetails);
@@ -1043,8 +1034,6 @@
 
         async function handleLinkAccountDetails() {
             const mobile = document.getElementById('link-mobile').value.trim();
-            const referralCodeInput = document.getElementById('link-referral');
-            const referralCode = referralCodeInput ? referralCodeInput.value.trim() : null;
 
             if (!mobile) return showAlert("অনুগ্রহ করে আপনার WhatsApp নম্বরটি পূরণ করুন।");
             if (!/^01\d{9}$/.test(mobile)) return showAlert("💬 অনুগ্রহ করে সঠিক WhatsApp নম্বর লিখুন।");
@@ -1062,23 +1051,7 @@
                 
                 const userRef = doc(db, "users", currentUserId);
                 const updateData = { mobileNumber: mobile };
-                
-                if (referralCode && !userData.referredBy) {
-                    if (referralCode === currentUserId) {
-                        splashScreen.style.display = 'none';
-                        splashScreen.style.opacity = '0';
-                        return showAlert("নিজের রেফার কোড ব্যবহার করা সম্ভব নয়।");
-                    }
-                    const referrerRef = doc(db, "users", referralCode);
-                    const referrerSnap = await getDoc(referrerRef);
-                    if (!referrerSnap.exists()) {
-                        splashScreen.style.display = 'none';
-                        splashScreen.style.opacity = '0';
-                        return showAlert("🚫 Invalid Refer Code!");
-                    }
-                    updateData.referredBy = referralCode;
-                }
-                
+                       
                 await updateDoc(userRef, updateData);
                 await fetchUserData(); 
                 showAlert("আপনার তথ্য সফলভাবে যোগ করা হয়েছে।");
