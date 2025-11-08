@@ -244,7 +244,7 @@
     <div id="app-container" class="min-h-screen flex-col main-page" style="display: none;">
         <header class="header flex items-center justify-between p-4 sticky top-0 z-10">
             <div class="flex items-center space-x-2">
-                <h1 class="text-xl font-bold text-accent-gradient">𝐁𝐞𝐬𝐭 𝐌𝐚𝐫𝐤𝐞𝐭𝐁𝐨𝐭</h1>
+                <h1 class="text-xl font-bold text-accent-gradient">𝐁𝐞𝐬𝐭 𝐌𝐚𝐫𝐤𝐞𝐭𝐁ot</h1>
                 <button id="header-withdraw-btn" class="btn-gradient px-3 py-1 rounded-full text-sm font-bold">PAYMENT</button>
             </div>
             <div id="header-balance-display" class="font-bold text-[#0d6efd]">৳0.00</div>
@@ -433,7 +433,7 @@
                 <div class="mt-4 flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-sm text-gray-600">
                     <div class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-gray-500"></i><span>From Bangladesh</span></div>
                     <div class="flex items-center gap-1.5"><i data-lucide="heart" class="w-4 h-4 text-gray-500"></i><span>Single</span></div>
-                    <div class="flex items-center gap-1.5"><i data-lucide="briefcase" class="w-4 h-4 text-gray-500"></i><span>Work at 𝐁𝐞𝐬𝐭 𝐌𝐚𝐫𝐤𝐞𝐭𝐁𝐨𝐭 job</span></div>
+                    <div class="flex items-center gap-1.5"><i data-lucide="briefcase" class="w-4 h-4 text-gray-500"></i><span>Work at 𝐁𝐞𝐬𝐭 𝐌𝐚𝐫𝐤𝐞𝐭𝐁ot job</span></div>
                 </div>
                 
                 <div class="card-bg p-4 rounded-xl">
@@ -493,8 +493,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <button id="features-deposit-btn" class="p-3 rounded-lg font-bold text-white bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg btn">Deposit</button>
                     <button id="features-withdraw-btn" class="p-3 rounded-lg font-bold text-white text-center bg-gradient-to-r from-red-500 to-rose-500 shadow-lg btn">Withdraw</button>
-                    <button id="features-receive-btn" class="p-3 rounded-lg font-bold text-white bg-gradient-to-r from-blue-500 to-sky-500 shadow-lg btn flex items-center justify-center gap-1"><i data-lucide="arrow-down-to-line" class="w-4 h-4"></i><span>Receive</span></button>
-                    <button id="features-send-btn" class="p-3 rounded-lg font-bold text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg btn">SEND</button>
+                    <!-- Removed Receive and Send Buttons -->
                 </div>
 
                 <div>
@@ -503,31 +502,7 @@
                 </div>
             </div>
 
-            <div id="send-page" class="p-4 space-y-6 sub-page relative">    
-                <button onclick="goBack()" class="absolute top-4 left-4 p-2 rounded-full hover:bg-gray-100 z-10"><i data-lucide="arrow-left" class="w-6 h-6"></i></button>
-                <div class="card-bg p-5 rounded-xl space-y-5 mt-10">
-                    <div>
-                        <h3 class="font-semibold text-lg flex items-center gap-2 mb-4"><i data-lucide="send" class="w-6 h-6 text-[#0d6efd]"></i><span>Send Balance (from Tasks)</span></h3>
-                        <div class="text-center my-4 p-3 rounded-lg border border-dashed border-blue-500/50 bg-blue-500/10">
-                            <p class="text-gray-600">Your Current Tasks Balance</p>
-                            <p id="send-balance-display" class="text-2xl font-bold">৳0.00</p>
-                        </div>
-                        <div class="space-y-4">
-                             <div>
-                                <label for="recipient-id" class="block text-sm font-medium text-gray-600 mb-2">Recipient's User ID</label>
-                                <input id="recipient-id" type="text" placeholder="Enter the user ID to send money to" class="w-full p-3 rounded-lg input-field">
-                            </div>
-                            <div>
-                                <label for="send-amount" class="block text-sm font-medium text-gray-600 mb-2">Amount to Send</label>
-                                <input id="send-amount" type="number" placeholder="e.g., 100" class="w-full p-3 rounded-lg input-field" oninput="calculateSendFee()">
-                                <div id="send-fee-calculation-display" class="text-sm mt-2 p-3 bg-gray-50 rounded-lg text-center space-y-1">
-                                </div>
-                            </div>
-                            <button id="send-submit-btn" class="w-full p-3 rounded-lg btn-gradient">Submit Transfer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Removed Send Page -->
             </main>
 
         <nav class="bottom-nav">
@@ -539,15 +514,7 @@
         </nav>
     </div>
     
-    <div id="activation-prompt" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[100] p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-lg p-6 w-full max-w-sm text-center border border-gray-200 shadow-xl relative">
-            <button id="close-activation-prompt" class="absolute top-2 right-2 p-2 text-gray-400 hover:text-gray-600 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-            <i data-lucide="lock" class="w-12 h-12 text-yellow-500 mx-auto mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">Account Inactive</h3>
-            <p id="activation-message" class="text-gray-600 mb-5">আপনার অ্যাকাউন্টটি ব্যবহার করার জন্য অ্যাক্টিভ করা প্রয়োজন।</p>
-            <button id="activate-account-btn" class="btn-gradient w-full px-8 py-3 rounded-lg">Activate Now</button>
-        </div>
-    </div>
+    <!-- Removed Activation Prompt -->
 
     <div id="custom-alert" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[101] p-4 backdrop-blur-sm">
         <div class="bg-white rounded-lg p-6 w-full max-w-sm text-center border border-gray-200 shadow-xl">
@@ -645,7 +612,6 @@
         let currentWithdrawSource = 'main'; // 'main', 'sell', or 'referral'
         
         const splashScreen = document.getElementById('splash-screen');
-        const activationPrompt = document.getElementById('activation-prompt');
         
         window.onload = async () => {
             try {
@@ -686,7 +652,6 @@
             
             updateBalanceDisplays();
             navigateTo('home-page', true); 
-            checkActivation();
 
             // Hide splash screen and show the main app
             splashScreen.style.opacity = '0';
@@ -716,14 +681,12 @@
                     updates.sellBalance = 0;
                     userData.sellBalance = 0;
                 }
+                // Referral balance and related logic removed. Default to 0 if exists.
                 if (typeof userData.referralBalance === 'undefined') {
                     updates.referralBalance = 0;
                     userData.referralBalance = 0;
                 }
-                 if (userData.referralCode !== currentUserId) {
-                    updates.referralCode = currentUserId;
-                    userData.referralCode = currentUserId; 
-                }
+                // Referral code and referredBy logic removed.
                 if (Object.keys(updates).length > 0) {
                      await updateDoc(userRef, updates);
                 }
@@ -737,34 +700,15 @@
                     mobileNumber: null,
                     mainBalance: 0,
                     sellBalance: 0,
-                    referralBalance: 0,
+                    referralBalance: 0, // Initializing referralBalance but related logic is removed.
                     createdAt: serverTimestamp(),
                     isBlocked: false,
-                    isActivated: false,
-                    referralCode: currentUserId, 
-                    referredBy: null 
+                    isActivated: true, // Accounts are now active by default.
                 };
                 
-                const startParam = window.Telegram.WebApp.initDataUnsafe?.start_param;
-                if (startParam && startParam !== currentUserId) {
-                    newUserData.referredBy = startParam;
-                }
-
                 await setDoc(userRef, newUserData);
                 userData = newUserData;
             }
-        }
-
-        function checkActivation() {
-            if (currentUser && userData && !userData.isActivated) {
-                const activationFee = appConfig.activationFee || 0;
-                document.getElementById('activation-message').innerText = `আপনার অ্যাকাউন্টটি ব্যবহার করার জন্য অ্যাক্টিভ করা প্রয়োজন। অ্যাক্টিভেশন ফি: ৳${activationFee.toFixed(2)}`;
-                activationPrompt.classList.remove('hidden');
-                lucide.createIcons();
-                return false;
-            }
-            activationPrompt.classList.add('hidden');
-            return true;
         }
 
         async function fetchUserData() {
@@ -781,17 +725,14 @@
             const configSnap = await getDoc(configRef);
             appConfig = configSnap.exists() ? configSnap.data() : { 
                 sellableItems: [], 
-                activationFee: 50, 
-                referralBonus: 10,
+                // Activation fee and referral bonus removed
                 addReviewLink: '#',
-                // NEW: Default withdrawal settings
                 withdrawSettings: {
                     main: { min: 100, feePercent: 5 },
                     sell: { min: 150, feePercent: 4 },
                     referral: { min: 50, feePercent: 10 }
                 }
             };
-            // Ensure withdrawSettings exists for backward compatibility
             if (!appConfig.withdrawSettings) {
                 appConfig.withdrawSettings = {
                     main: { min: 100, feePercent: 5 },
@@ -822,11 +763,6 @@
         window.goBack = goBack;
 
         function navigateTo(pageId, isInitial = false) {
-            // *** MODIFICATION: Check for activation before navigating to tasks page ***
-            if (pageId === 'tasks-page' && !checkActivation()) {
-                return; // Stop navigation if account is not active
-            }
-
             if (!isInitial) {
                 const currentPage = document.querySelector('.sub-page.active');
                 if (currentPage) {
@@ -850,7 +786,7 @@
                 'features-page': loadFeaturesPage,
                 'tasks-page': loadTaskCategories,
                 'withdraw-page': loadWithdrawPage,
-                'send-page': loadSendPage
+                // 'send-page': loadSendPage // Removed
             };
             if (pageLoadFunctions[pageId]) pageLoadFunctions[pageId]();
             lucide.createIcons();
@@ -869,113 +805,38 @@
 
             document.getElementById('deposit-btn').addEventListener('click', handleDepositRequest);
             document.getElementById('withdraw-btn').addEventListener('click', handleWithdrawRequest);
-            document.getElementById('send-submit-btn').addEventListener('click', handleSendRequest);
+            // document.getElementById('send-submit-btn').addEventListener('click', handleSendRequest); // Removed
             
             document.getElementById('toggle-account-details-btn').addEventListener('click', () => { document.getElementById('account-details-content').classList.toggle('hidden'); document.getElementById('account-details-chevron').classList.toggle('rotate-180'); });
             document.getElementById('sell-modal-cancel').addEventListener('click', () => document.getElementById('sell-modal').classList.add('hidden'));
             document.getElementById('deposit-details-btn').addEventListener('click', () => document.getElementById('deposit-details-modal').classList.remove('hidden'));
             document.getElementById('deposit-details-ok-btn').addEventListener('click', () => document.getElementById('deposit-details-modal').classList.add('hidden'));
             
-            document.getElementById('sell-page-more-features-btn').addEventListener('click', () => { if(checkActivation()) navigateTo('features-page'); });
-            document.getElementById('more-features-btn').addEventListener('click', () => { if(checkActivation()) navigateTo('features-page'); });
+            document.getElementById('sell-page-more-features-btn').addEventListener('click', () => { navigateTo('features-page'); }); // Activation check removed
+            document.getElementById('more-features-btn').addEventListener('click', () => { navigateTo('features-page'); }); // Activation check removed
             
-            document.getElementById('features-receive-btn').addEventListener('click', handleReceive);
-            document.getElementById('features-send-btn').addEventListener('click', () => navigateTo('send-page'));
+            // document.getElementById('features-receive-btn').addEventListener('click', handleReceive); // Removed
+            // document.getElementById('features-send-btn').addEventListener('click', () => navigateTo('send-page')); // Removed
 
             document.getElementById('copy-referral-btn').addEventListener('click', () => {
                 const referralLink = `https://t.me/Best_Marketr_bot/best?startapp=${currentUserId}`;
                 copyToClipboard(referralLink, document.getElementById('copy-referral-btn'));
             });
-            document.getElementById('activate-account-btn').addEventListener('click', handleActivation);
-            document.getElementById('close-activation-prompt').addEventListener('click', () => activationPrompt.classList.add('hidden'));
+            // document.getElementById('activate-account-btn').addEventListener('click', handleActivation); // Removed
+            // document.getElementById('close-activation-prompt').addEventListener('click', () => activationPrompt.classList.add('hidden')); // Removed
 
             document.getElementById('manual-task-modal-cancel').addEventListener('click', () => document.getElementById('manual-task-modal').classList.add('hidden'));
         }
         
-        async function handleActivation() {
-            const activationFee = appConfig.activationFee || 0;
-            if (userData.mainBalance < activationFee) {
-                showAlert(`আপনার Tasks Balance কম। অ্যাকাউন্ট অ্যাক্টিভ করতে ৳${activationFee.toFixed(2)} প্রয়োজন। অনুগ্রহ করে ডিপোজিট করুন।`);
-                activationPrompt.classList.add('hidden');
-                navigateTo('pay-page');
-                return;
-            }
+        // Removed handleActivation function
 
-            if (!confirm(`আপনি কি ৳${activationFee.toFixed(2)} দিয়ে আপনার অ্যাকাউন্টটি অ্যাক্টিভ করতে চান? এই টাকা আপনার Tasks Balance থেকে কাটা হবে।`)) return;
-            
-            splashScreen.style.display = 'flex';
-            splashScreen.style.opacity = '1';
-
-            const userRef = doc(db, "users", currentUserId);
-
-            try {
-                await runTransaction(db, async (transaction) => {
-                    const userDoc = await transaction.get(userRef);
-                    if (!userDoc.exists() || userDoc.data().isActivated) throw "অ্যাকাউন্ট ইতিমধ্যে অ্যাক্টিভ আছে।";
-                    if (userDoc.data().mainBalance < activationFee) throw "অপর্যাপ্ত ব্যালেন্স।";
-
-                    // === START: IMPROVED AND SAFER LOGIC ===
-
-                    transaction.update(userRef, { mainBalance: increment(-activationFee), isActivated: true });
-
-                    const referrerId = userDoc.data().referredBy;
-                    if (referrerId) {
-                        const creationTimestamp = userDoc.data().createdAt;
-                        
-                        // Check if creationTimestamp is a valid Firestore Timestamp object before proceeding
-                        if (creationTimestamp && typeof creationTimestamp.toDate === 'function') {
-                            const creationDate = creationTimestamp.toDate();
-                            const now = new Date();
-                            const hoursDiff = (now.getTime() - creationDate.getTime()) / (1000 * 60 * 60);
-
-                            // বোনাস শুধুমাত্র অ্যাকাউন্ট খোলার ৬ ঘন্টার মধ্যে অ্যাক্টিভ করলে দেওয়া হবে
-                            if (hoursDiff <= 6) {
-                                const referrerRef = doc(db, "users", referrerId);
-                                const referrerSnap = await transaction.get(referrerRef);
-                                if (referrerSnap.exists()) {
-                                    const referralBonus = appConfig.referralBonus || 0;
-                                    transaction.update(referrerRef, { referralBalance: increment(referralBonus) });
-                                }
-                            } else {
-                                console.log(`Referral bonus for ${referrerId} skipped. User activated after the 6-hour window.`);
-                            }
-                        } else {
-                            // If createdAt is missing or invalid, log it but don't crash the activation
-                            console.error(`User ${currentUserId} is missing a valid 'createdAt' timestamp. Cannot calculate referral bonus window.`);
-                        }
-                    }
-                    // === END: IMPROVED AND SAFER LOGIC ===
-                });
-
-                await fetchUserData(); 
-                updateBalanceDisplays();
-                activationPrompt.classList.add('hidden');
-                showAlert("অভিনন্দন! আপনার অ্যাকাউন্ট সফলভাবে অ্যাক্টিভ করা হয়েছে।");
-                loadProfilePage();
-
-            } catch (error) {
-                console.error("Activation failed:", error);
-                showAlert(typeof error === 'string' ? error : "অ্যাকাউন্ট অ্যাক্টিভ করতে সমস্যা হয়েছে।");
-            } finally {
-                splashScreen.style.display = 'none';
-                splashScreen.style.opacity = '0';
-            }
-        }
-        
         async function loadProfilePage() {
             if (!userData) return;
             
             const leaderElement = document.getElementById('profile-leader');
             leaderElement.textContent = ''; 
-            if (userData.referredBy) {
-                const referrerRef = doc(db, "users", userData.referredBy);
-                const referrerSnap = await getDoc(referrerRef);
-                leaderElement.innerHTML = referrerSnap.exists() 
-                    ? `Your Leader: <span class="text-accent-gradient">${referrerSnap.data().name}</span>`
-                    : 'Leader not found';
-            } else {
-                leaderElement.textContent = 'You joined without a referral.';
-            }
+            // Referral leader logic removed
+            leaderElement.textContent = 'No leader assigned.'; 
 
             const profilePic = document.getElementById('profile-pic');
             const avatarDiv = document.getElementById('profile-initials-avatar');
@@ -993,16 +854,11 @@
             document.getElementById('profile-name').textContent = userData.name;
             document.getElementById('profile-username').textContent = userData.username ? `@${userData.username}` : 'No Telegram username';
             document.getElementById('profile-id').textContent = `User ID: ${currentUserId}`;
-            document.getElementById('referral-code-display').textContent = userData.referralCode || "Loading...";
+            document.getElementById('referral-code-display').textContent = currentUserId || "Loading..."; // Always use currentUserId as referral code as there's no referral system
 
             const activationStatusElement = document.getElementById('profile-activation-status');
-            if (userData.isActivated) {
-                activationStatusElement.textContent = 'Active Account';
-                activationStatusElement.className = 'mt-3 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700';
-            } else {
-                activationStatusElement.textContent = 'Inactive Account';
-                activationStatusElement.className = 'mt-3 px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-700';
-            }
+            activationStatusElement.textContent = 'Active Account'; // Always active
+            activationStatusElement.className = 'mt-3 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700';
             
             const detailsContainer = document.getElementById('account-details-content');
             if (userData.mobileNumber) {
@@ -1167,7 +1023,6 @@
         }
         
         function openWithdrawSourceModal() {
-            if (!checkActivation()) return;
             document.getElementById('modal-main-balance').textContent = `৳${(userData.mainBalance || 0).toFixed(2)}`;
             document.getElementById('modal-sell-balance').textContent = `৳${(userData.sellBalance || 0).toFixed(2)}`;
             document.getElementById('modal-referral-balance').textContent = `৳${(userData.referralBalance || 0).toFixed(2)}`;
@@ -1181,7 +1036,6 @@
         }
 
         async function loadWithdrawPage() {
-            if (!checkActivation()) return;
             
             let balance = 0;
             let titleText = '';
@@ -1347,17 +1201,12 @@
             sellableItems.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'card-bg p-4 rounded-xl space-y-3';
-                let sellButtonDisabled = userData && !userData.isActivated ? 'disabled' : '';
-                let sellButtonClass = userData && !userData.isActivated ? 'btn-disabled' : 'btn-gradient';
-                itemDiv.innerHTML = `<div class="flex justify-between items-center"><div class="flex items-center gap-3"><img src="${item.logoUrl || ''}" class="w-8 h-8 rounded-full object-cover" alt="${item.type} logo"><h3 class="font-bold text-lg">${item.type}</h3></div><button class="btn-outline-accent px-3 py-1 text-xs rounded-md">Details</button></div><div class="grid grid-cols-3 text-center items-center pt-2 border-t border-gray-200"><div class="py-2"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">${item.reportText || ''}</span></div><div class="py-2"><p class="font-bold text-lg text-blue-600">৳${parseFloat(item.price).toFixed(2)}</p></div><div class="py-2"><p class="font-semibold text-sky-600">${item.availabilityText || 'N/A'}</p></div></div><button class="${sellButtonClass} w-full py-2 rounded-lg text-md font-bold" ${sellButtonDisabled}>SELL NOW</button>`;
+                // Activation check removed, so 'disabled' attribute is removed
+                let sellButtonClass = 'btn-gradient'; 
+                itemDiv.innerHTML = `<div class="flex justify-between items-center"><div class="flex items-center gap-3"><img src="${item.logoUrl || ''}" class="w-8 h-8 rounded-full object-cover" alt="${item.type} logo"><h3 class="font-bold text-lg">${item.type}</h3></div><button class="btn-outline-accent px-3 py-1 text-xs rounded-md">Details</button></div><div class="grid grid-cols-3 text-center items-center pt-2 border-t border-gray-200"><div class="py-2"><span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">${item.reportText || ''}</span></div><div class="py-2"><p class="font-bold text-lg text-blue-600">৳${parseFloat(item.price).toFixed(2)}</p></div><div class="py-2"><p class="font-semibold text-sky-600">${item.availabilityText || 'N/A'}</p></div></div><button class="${sellButtonClass} w-full py-2 rounded-lg text-md font-bold">SELL NOW</button>`;
                 
                 itemDiv.querySelector('.btn-outline-accent').onclick = () => showSellDetails(item.details);
                 itemDiv.querySelector(`.${sellButtonClass}`).onclick = () => {
-                    if (!userData.isActivated) {
-                        showAlert("আপনার অ্যাকাউন্ট অ্যাক্টিভ করা প্রয়োজন 'SELL NOW' ব্যবহার করার জন্য।");
-                        checkActivation();
-                        return;
-                    }
                     openSellModal(item.type, item.details);
                 };
                 sellList.appendChild(itemDiv);
@@ -1368,11 +1217,6 @@
         window.showSellDetails = function(details) { showAlert(`Details\n\n${details}`); }
 
         window.openSellModal = function(type, itemDetails) {
-            if (!userData.isActivated) {
-                showAlert("আপনার অ্যাকাউন্ট অ্যাক্টিভ করা প্রয়োজন 'SELL NOW' ব্যবহার করার জন্য।");
-                checkActivation(); 
-                return;
-            }
             const modal = document.getElementById('sell-modal');
             const itemConfig = (appConfig.sellableItems || []).find(item => item.type === type && item.details === itemDetails);
             if (!itemConfig) return showAlert("Error: Item configuration not found.");
@@ -1387,11 +1231,6 @@
         }
         
 async function handleSellRequest(itemConfig) {
-    if (!userData.isActivated) {
-        showAlert("আপনার অ্যাকাউন্ট অ্যাক্টিভ করা প্রয়োজন 'SELL NOW' ব্যবহার করার জন্য।");
-        checkActivation();
-        return;
-    }
     const accountDetails = {};
     let isValid = true;
     document.querySelectorAll('#sell-modal-fields-container input').forEach(input => {
@@ -1407,32 +1246,26 @@ async function handleSellRequest(itemConfig) {
     splashScreen.style.opacity = '1';
 
     try {
-        // ### নতুন ডুপ্লিকেট চেকিং কোড শুরু ###
-        // আমরা ধরে নিচ্ছি যে প্রথম ফিল্ডটিই (যেমন: ইমেল বা ইউজারনেম) ইউনিক হবে।
         if (itemConfig.fields && itemConfig.fields.length > 0) {
-            const uniqueFieldName = itemConfig.fields[0].name; // প্রথম ফিল্ডের নাম
-            const uniqueFieldValue = accountDetails[uniqueFieldName]; // ব্যবহারকারীর দেওয়া সেই ফিল্ডের ভ্যালু
+            const uniqueFieldName = itemConfig.fields[0].name; 
+            const uniqueFieldValue = accountDetails[uniqueFieldName]; 
 
             if (uniqueFieldValue) {
-                // Firestore-এ কুয়েরি করে দেখা হচ্ছে এই তথ্য দিয়ে আগে কোনো অনুরোধ আছে কিনা
                 const duplicateCheckQuery = query(
                     collection(db, "sell_requests"),
                     where(`accountDetails.${uniqueFieldName}`, "==", uniqueFieldValue)
                 );
                 const snapshot = await getDocs(duplicateCheckQuery);
 
-                // যদি কোনো ডুপ্লিকেট পাওয়া যায়
                 if (!snapshot.empty) {
                     showAlert(`আপনার(${uniqueFieldName}: ${uniqueFieldValue})অ্যাকাউন্ট একবার Sell দিয়েছেন`);
                     splashScreen.style.display = 'none';
                     splashScreen.style.opacity = '0';
-                    return; // ফাংশন এখানেই শেষ
+                    return; 
                 }
             }
         }
-        // ### নতুন ডুপ্লিকেট চেকিং কোড শেষ ###
 
-        // যদি কোনো ডুপ্লিকেট না পাওয়া যায়, তবেই নতুন অনুরোধ জমা হবে।
         await addDoc(collection(db, "sell_requests"), {
             userId: currentUserId,
             userName: userData.name,
@@ -1478,8 +1311,6 @@ async function loadUpdates() {
 
     reviewFab.href = appConfig.addReviewLink || '#';
 
-    // ১. এখানে আপনার টেলিগ্রাম চ্যানেলের লিংকসহ বাটনটি তৈরি করা হয়েছে।
-    //    প্রয়োজনে "href" এর ভেতরের লিংকটি পরিবর্তন করে নিতে পারেন।
     const channelButtonHtml = `
         <a href="https://t.me/BestMarketMain" target="_blank" 
            class="flex items-center justify-center gap-3 w-full p-3 rounded-xl mb-6 
@@ -1490,7 +1321,6 @@ async function loadUpdates() {
         </a>
     `;
     
-    // ২. একটি ভেরিয়েবলে বাটনের কোডটি রেখে দেওয়া হলো।
     let finalHtml = channelButtonHtml; 
 
     try {
@@ -1498,7 +1328,6 @@ async function loadUpdates() {
         const snapshot = await getDocs(q);
 
         if (snapshot.empty) {
-            // ৩. যদি কোনো আপডেট না থাকে, তাহলে বাটনের নিচে 'No new updates' বার্তাটি যোগ করা হবে।
             finalHtml += `<div class="card-bg p-6 rounded-2xl text-center"><h3 class="font-bold text-xl">No new updates right now!</h3><p class="text-gray-500 mt-2">Check back later.</p></div>`;
         } else {
             let allUpdatesHtml = '';
@@ -1544,11 +1373,9 @@ async function loadUpdates() {
                 </div>`;
             }
             await batch.commit(); 
-            // ৪. যদি আপডেট থাকে, তাহলে বাটনের নিচে সেই আপডেটগুলো যোগ করা হবে।
             finalHtml += allUpdatesHtml;
         }
         
-        // ৫. সবশেষে, সম্পূর্ণ কোডটি (বাটন + কন্টেন্ট) পেইজে দেখানো হবে।
         updatesContainer.innerHTML = finalHtml;
         
         lucide.createIcons();
@@ -1580,7 +1407,6 @@ async function loadUpdates() {
                     return;
                 }
                 
-                // *** CHANGE: Updated review card to a more premium design ***
                 reviewsList.innerHTML = snapshot.docs.map(doc => {
                     const review = doc.data();
                     const starsHtml = renderStars(review.rating || 5);
@@ -1616,10 +1442,6 @@ async function loadUpdates() {
 
 
         window.handleVote = async function(voteType, updateId) {
-            if (!checkActivation()) {
-                showAlert("আপনার অ্যাকাউন্ট অ্যাক্টিভ করা প্রয়োজন ভোট দেওয়ার জন্য।");
-                return;
-            }
             const likeBtn = document.getElementById(`like-btn-${updateId}`);
             const dislikeBtn = document.getElementById(`dislike-btn-${updateId}`);
             likeBtn.disabled = true;
@@ -1693,7 +1515,6 @@ async function loadUpdates() {
         }
         
         async function loadFeaturesPage() {
-            if (!checkActivation()) return;
             splashScreen.style.display = 'flex';
             splashScreen.style.opacity = '1';
             try {
@@ -1707,10 +1528,8 @@ async function loadUpdates() {
                 const totalIncome = incomeSnapshot.docs.reduce((sum, doc) => sum + doc.data().askingPrice, 0);
                 document.getElementById('total-income-display').textContent = `৳${totalIncome.toFixed(2)}`;
 
-                const receivedQuery = query(collection(db, "transfers"), where("toId", "==", currentUserId));
-                const receivedSnapshot = await getDocs(receivedQuery);
-                const totalReceive = receivedSnapshot.docs.reduce((sum, doc) => sum + doc.data().amount, 0);
-                document.getElementById('total-receive-display').textContent = `৳${totalReceive.toFixed(2)}`;
+                // Removed receive and send related queries
+                document.getElementById('total-receive-display').textContent = `৳0.00`;
 
                 const withdrawQuery = query(collection(db, "withdrawals"), where("userId", "==", currentUserId), where("status", "==", "approved"));
                 const withdrawSnapshot = await getDocs(withdrawQuery);
@@ -1727,124 +1546,16 @@ async function loadUpdates() {
 
         async function loadTransferHistory() {
             const historyList = document.getElementById('transfer-history-list');
-            historyList.innerHTML = '<p class="text-gray-500 text-center">Loading history...</p>';
-            const sentQuery = query(collection(db, "transfers"), where("fromId", "==", currentUserId), orderBy("timestamp", "desc"));
-            const receivedQuery = query(collection(db, "transfers"), where("toId", "==", currentUserId), orderBy("timestamp", "desc"));
-            const [sentSnapshot, receivedSnapshot] = await Promise.all([getDocs(sentQuery), getDocs(receivedQuery)]);
-            const transactions = [];
-            sentSnapshot.forEach(doc => transactions.push({ id: doc.id, ...doc.data() }));
-            receivedSnapshot.forEach(doc => transactions.push({ id: doc.id, ...doc.data() }));
-            transactions.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
-            if (transactions.length === 0) {
-                historyList.innerHTML = '<p class="text-gray-500 text-center">No transfer history found.</p>';
-                return;
-            }
-            historyList.innerHTML = transactions.map(item => {
-                const isSent = item.fromId === currentUserId;
-                const date = item.timestamp.toDate().toLocaleString('en-GB');
-                const sign = isSent ? '-' : '+';
-                const color = isSent ? 'text-red-500' : 'text-green-500';
-                const actionText = isSent ? `Sent to ${item.toName}` : `Received from ${item.fromName}`;
-                return `<div class="card-bg p-3 rounded-lg flex items-center justify-between"><div><p class="font-semibold">${actionText}</p><p class="text-xs text-gray-500">${date}</p></div><p class="font-bold text-lg ${color}">${sign}৳${item.amount.toFixed(2)}</p></div>`;
-            }).join('');
+            historyList.innerHTML = '<p class="text-gray-500 text-center">No transfer history found as receive/send functions are removed.</p>';
+            // All transfer logic removed, so display a message.
         }
 
-        function handleReceive() {
-            if (!checkActivation()) return;
-            const message = `আপনার রিসিভ আইডি:\n\n${currentUserId}\n\nএই আইডি ব্যবহার করে অন্য ব্যবহারকারীর থেকে ব্যালেন্স রিসিভ করতে পারবেন।`;
-            copyToClipboard(currentUserId, null);
-            showAlert(message);
-        }
-
-        async function loadSendPage() {
-            if (!checkActivation()) return;
-            document.getElementById('send-balance-display').textContent = `৳${(userData.mainBalance || 0).toFixed(2)}`;
-            document.getElementById('recipient-id').value = '';
-            document.getElementById('send-amount').value = '';
-            calculateSendFee();
-        }
-
-        window.calculateSendFee = function() {
-            const amountInput = document.getElementById('send-amount');
-            const displayArea = document.getElementById('send-fee-calculation-display');
-            const amountToSend = parseFloat(amountInput.value);
-            
-            const feePercent = 5; 
-            const feeRate = feePercent / 100;
-
-            if (isNaN(amountToSend) || amountToSend <= 0) {
-                displayArea.innerHTML = '';
-                return;
-            }
-
-            const fee = amountToSend * feeRate;
-            const totalDeduction = amountToSend + fee;
-            
-            if (totalDeduction > (userData.mainBalance || 0)) {
-                displayArea.innerHTML = `<p class="text-red-500">Total with fee (৳${totalDeduction.toFixed(2)}) exceeds your balance.</p>`;
-            } else {
-                displayArea.innerHTML = `<p>Transfer Fee (${feePercent}%): <span class="font-bold text-red-500">৳${fee.toFixed(2)}</span></p>
-                                        <p>Total to be Deducted: <span class="font-bold">৳${totalDeduction.toFixed(2)}</span></p>`;
-            }
-        }
-
-        async function handleSendRequest() {
-            if (!checkActivation()) return;
-            const recipientId = document.getElementById('recipient-id').value.trim();
-            const amount = parseFloat(document.getElementById('send-amount').value);
-
-            if (!recipientId) return showAlert("অনুগ্রহ করে প্রাপকের User ID দিন।");
-            if (recipientId === currentUserId) return showAlert("আপনি নিজের একাউন্টে ব্যালেন্স পাঠাতে পারবেন না।");
-            if (isNaN(amount) || amount <= 0) return showAlert("অনুগ্রহ করে সঠিক পরিমাণ লিখুন।");
-            
-            const sendFeeRate = 0.05; 
-            const feeAmount = amount * sendFeeRate;
-            const totalDeductionFromSender = amount + feeAmount; 
-
-            if (totalDeductionFromSender > (userData.mainBalance || 0)) return showAlert("আপনার Tasks Balance-এ পর্যাপ্ত টাকা নেই।");
-
-            if (!confirm(`আপনি ৳${amount.toFixed(2)} টাকা পাঠাতে চাচ্ছেন।\nচার্জ (৫%): ৳${feeAmount.toFixed(2)}\nআপনার অ্যাকাউন্ট থেকে মোট কাটা হবে: ৳${totalDeductionFromSender.toFixed(2)}\nআপনি কি নিশ্চিত?`)) return;
-
-            splashScreen.style.display = 'flex';
-            splashScreen.style.opacity = '1';
-            const senderRef = doc(db, "users", currentUserId);
-            const recipientRef = doc(db, "users", recipientId);
-
-            try {
-                await runTransaction(db, async (transaction) => {
-                    const senderDoc = await transaction.get(senderRef);
-                    const recipientDoc = await transaction.get(recipientRef);
-                    
-                    if (!senderDoc.exists() || senderDoc.data().mainBalance < totalDeductionFromSender) throw "আপনার পর্যাপ্ত ব্যালেন্স নেই।";
-                    if (!recipientDoc.exists()) throw "প্রাপক আইডি (Recipient ID) খুঁজে পাওয়া যায়নি।";
-                    
-                    transaction.update(senderRef, { mainBalance: increment(-totalDeductionFromSender) });
-                    transaction.update(recipientRef, { mainBalance: increment(amount) }); 
-
-                    const transferLogRef = doc(collection(db, "transfers"));
-                    transaction.set(transferLogRef, {
-                        fromId: currentUserId, fromName: userData.name, toId: recipientId,
-                        toName: recipientDoc.data().name, amount: amount, fee: feeAmount, timestamp: serverTimestamp()
-                    });
-                });
-                
-                await fetchUserData();
-                updateBalanceDisplays();
-                showAlert(`সফলভাবে ৳${amount.toFixed(2)} পাঠানো হয়েছে।\nচার্জ বাবদ ৳${feeAmount.toFixed(2)} কাটা হয়েছে।`);
-                loadSendPage(); 
-                loadFeaturesPage();
-            } catch (error) {
-                console.error("Transfer failed: ", error);
-                showAlert(typeof error === 'string' ? error : "ব্যালেন্স পাঠাতে সমস্যা হয়েছে।");
-            } finally {
-                splashScreen.style.display = 'none';
-                splashScreen.style.opacity = '0';
-            }
-        }
+        // Removed handleReceive function
+        // Removed loadSendPage function
+        // Removed calculateSendFee function
+        // Removed handleSendRequest function
         
         async function loadTaskCategories() {
-            if (!checkActivation()) return;
-
             const categoryList = document.getElementById("task-category-list");
             categoryList.innerHTML = '<p class="text-gray-400 text-center">Loading categories...</p>';
             
@@ -1861,7 +1572,6 @@ async function loadUpdates() {
                     return;
                 }
                 
-                // ✅ MODIFICATION: Updated the task item layout to include a "GO!" button.
                 categoryList.innerHTML = snapshot.docs.map(doc => {
                     const category = doc.data();
                     return `
